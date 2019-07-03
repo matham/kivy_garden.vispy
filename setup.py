@@ -17,14 +17,13 @@ except ImportError:
 # __init__.py, which would import the cython-compiled code. But that has
 # not been compiled yet so it would fail. So import only _version.py
 filename = join(
-    dirname(__file__), 'kivy_garden', 'cython_flower', '_version.py')
-# change this                             ^^^^^^^^
+    dirname(__file__), 'kivy_garden', 'vispy', '_version.py')
 locals = {}
 with open(filename, "rb") as fh:
     exec(compile(fh.read(), filename, 'exec'), globals(), locals)
 __version__ = locals['__version__']
 
-URL = 'https://github.com/kivy-garden/cython_flower'  # <-- change this
+URL = 'https://github.com/kivy-garden/vispy'
 
 
 platform = sys.platform
@@ -111,7 +110,7 @@ if can_use_cython:
 else:
     mod_suffix = '.c'
 
-mods = ['cython_flower/_compute']  # <-- change this
+mods = ['vispy/_gl']
 
 ext_modules = [Extension(
     'kivy_garden.' + src_file.replace('/', '.'),
@@ -129,9 +128,9 @@ if declare_cython:
     setup_requires.append('cython')
 
 setup(
-    name='kivy_garden.cython_flower',  # <-- change this
+    name='kivy_garden.vispy',
     version=__version__,
-    description='A kivy garden cython flower demo.',
+    description='Kivy widget for vispy.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url=URL,
@@ -148,7 +147,7 @@ setup(
     ],
     keywords='Kivy kivy-garden',
 
-    packages=['kivy_garden.cython_flower'],
+    packages=['kivy_garden.vispy'],
     setup_requires=setup_requires,
     install_requires=[],
     extras_require={
